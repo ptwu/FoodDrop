@@ -9,11 +9,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  
-  
-</head>
-<body>
-  <header>	
+   <header>	
       <nav class="top-nav" style="background-color:#c62828">
         <div class="container">
           <div class="nav-wrapper">
@@ -33,39 +29,31 @@
 			<li><a style="text-color:#000000;pointer-events: none">Menu</a></li>
 
 			<li><a href="index.html"><i class="material-icons">info_outline</i>Home</a></li>
-			<li class="active"><a class="waves-effect" href="#"><i class="material-icons">assignment_ind</i>My Drops</a></li>
+			<li><a class="waves-effect" href="myDrops.html"><i class="material-icons">assignment_ind</i>My Drops</a></li>
 			<li><a class="waves-effect" href="causes.html"><i class="material-icons">stars</i>Causes</a></li>
 			<li><a class="waves-effect" href="nearMe.html"><i class="material-icons">room</i>Near Me</a></li>
-
 			
 		
 	  </ul>
 	  
      
     </header>
-	<main>
   
+</head>
+<body>
 
-		<!-- CARD -->
-		<div class="container">
- 		<div class="row valign-wrapper">
-	        <div class="col s12">
-	          <div class="card">
-	            <div class="card-image">
-	              <img class="responsive-img" src="http://i.imgur.com/VToGAEW.jpg">
-	              <span class="card-title">Lettuce</span>
-	            </div>
-	            <div class="card-content">
-	              <p>Dropper: you</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">end drop</a>
-	            </div>
-	          </div>
-	      </div>
-	    </div>
-	    </div>
-  </main>
+ 
+	<main>
+	<h4 style="text-align:center">Create a Drop</h4>
+		<input type="file" name="fileupload" value="fileupload" id="fileupload">
+
+	<h6>Drop Title:</h6> <input type="text" name="dropTitle" placeholder="Granny Smith Apples"><br>
+	<h6>Description:</h6> <input type="text" name="desc" placeholder="Fresh apples from Millburn, NJ"><br>
+	<h6>Location:</h6> <input type="text" name="location" placeholder="Latitude, Longititude"><br>
+	<div class="row center">
+				<button href="#" id="createButton" class="btn-large waves-effect waves-light red darken-3">Automatically set location</button>
+				<button href="#" id="createButton" class="btn-large waves-effect waves-light red darken-3">Create</button>
+	  </div>
   </main>
     
 

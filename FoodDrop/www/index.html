@@ -18,7 +18,7 @@
         <div class="container">
           <div class="nav-wrapper">
 			  <a href="#" data-activates="slide-out" class="page-title button-collapse show-on-large"><i class="material-icons">menu</i></a>
-			  <a href="#" class="brand-logo center">FoodDrop</a> <a href="#" class="brand-logo right" style="font-size:12px"></a>
+			  <a href="#" class="brand-logo center"><img class="responsive-img" src = "img/navbarimg.png" ></img></a> <a href="#" class="brand-logo right" style="font-size:12px"></a>
 			  <ul id="nav-mobile" class="left hide-on-med-and-down">
 
 	
@@ -27,7 +27,12 @@
         </div>
 		
       </nav>
-	  
+	  <br><br>
+
+	  <div class="row center">
+				<a href="createDrop.html" id="index_beginCreation" class="btn-large waves-effect waves-light red darken-3">Create A Drop</a>
+	  </div>
+
 		<ul id="slide-out" class="side-nav" >
 		
 			<li><a style="text-color:#000000;pointer-events: none">Menu</a></li>
@@ -35,6 +40,7 @@
 			<li class="active"><a href="#"><i class="material-icons">info_outline</i>Home</a></li>
 			<li><a class="waves-effect" href="myDrops.html"><i class="material-icons">assignment_ind</i>My Drops</a></li>
 			<li><a class="waves-effect" href="causes.html"><i class="material-icons">stars</i>Causes</a></li>
+			<li><a class="waves-effect" href="nearMe.html"><i class="material-icons">room</i>Near Me</a></li>
 
 			
 		
@@ -43,17 +49,7 @@
      
     </header>
 	<main>
-		<div class="container">
-			<div class="section no-pad-bot" id="index-banner">
-			<div class="container">
-			  <br><br>
-			  
-
-			</div>
-		</div>
-		</div>
-  
-
+		
 		<!-- CARD -->
 		<div class="container">
  		<div class="row valign-wrapper">
@@ -83,7 +79,7 @@
   <script src="js/init.js"></script>
   <script>
 	$(".button-collapse").sideNav();
-	$('#index_getStartedButton').click(function(){ $(".button-collapse").sideNav('show'); return false; });
+	
   </script>
   <script src='cordova.js'></script>
   </body>
