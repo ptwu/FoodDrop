@@ -63,6 +63,12 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "org.fooddrop.fooddrop"
+        },
+        "cordova-plugin-firebase": {
+            "PACKAGE_NAME": "org.fooddrop.fooddrop"
+        },
+        "cordova-plugin-firebase-auth": {
+            "PACKAGE_NAME": "org.fooddrop.fooddrop"
         }
     },
     "dependent_plugins": {
@@ -70,6 +76,9 @@
             "PACKAGE_NAME": "org.fooddrop.fooddrop"
         },
         "cordova-plugin-file": {
+            "PACKAGE_NAME": "org.fooddrop.fooddrop"
+        },
+        "cordova-plugin-cocoapod-support": {
             "PACKAGE_NAME": "org.fooddrop.fooddrop"
         }
     }

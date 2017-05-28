@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "909620415382",
+    "firebase_url": "https://fooddrop-7bf0b.firebaseio.com",
+    "project_id": "fooddrop-7bf0b",
+    "storage_bucket": "fooddrop-7bf0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909620415382:android:1ee98a6043b40ae0",
+        "android_client_info": {
+          "package_name": "org.fooddrop.fooddrop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909620415382-1ja94svqhltf68ju0nfj1ahbrc0fd4ud.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRMco65LoK2N5z2sN6Uk-LybbBWqHnzWw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

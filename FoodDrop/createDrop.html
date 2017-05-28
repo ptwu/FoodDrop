@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+  <title>FoodDrop - Create Drop</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+   <header>	
+      <nav class="top-nav" style="background-color:#c62828">
+        <div class="container">
+          <div class="nav-wrapper">
+			   <a href="#" data-activates="slide-out" class="page-title button-collapse show-on-large"><i class="material-icons">menu</i></a>
+			  <a href="#" class="brand-logo center"><img class="responsive-img" src = "img/navbarimg.png" ></img></a> <a href="#" class="brand-logo right" style="font-size:12px"></a>
+			  <ul id="nav-mobile" class="left hide-on-med-and-down">
+
+	
+			  </ul>
+		  </div>
+        </div>
+		
+      </nav>
+	  
+		<ul id="slide-out" class="side-nav" >
+		
+			<li><a style="text-color:#000000;pointer-events: none">Menu</a></li>
+
+			<li><a href="index.html"><i class="material-icons">info_outline</i>Home</a></li>
+			<li><a class="waves-effect" href="myDrops.html"><i class="material-icons">assignment_ind</i>My Drops</a></li>
+			<li><a class="waves-effect" href="causes.html"><i class="material-icons">stars</i>Causes</a></li>
+			<li><a class="waves-effect" href="login.html"><i class="material-icons">vpn_key</i>Login/Register</a></li>
+		
+	  </ul>
+	  
+     
+    </header>
+  
+</head>
+<body>
+
+ 
+	<main>
+	<h4 style="text-align:center">Create a Drop</h4>
+
+		<p>Upload an image of your food: </p>
+		<input id="createDrop_file" type="file" name="fileupload" value="fileupload" id="fileupload">
+		<br><br>
+	<h6>Drop Title:</h6> <input id="createDrop_title" type="text" name="dropTitle" placeholder="Granny Smith Apples"><br>
+	<h6>Description:</h6> <input id="createDrop_description" type="text" name="desc" placeholder="Fresh apples from Millburn, NJ"><br>
+	<h6>Location:</h6> <input id="createDrop_location" type="text" name="location" placeholder="Latitude, Longititude"><br>
+	<div class="row center">
+				
+				<button  id="createButton" class="btn-large waves-effect waves-light red darken-3" onclick="foodpool_firebase_addDrop()">Create</button>
+	  </div>
+  </main>
+    
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKuwo5MRYI7s05OvlbJEpEfYF3TrKRT5Q&callback=initGeolocation"
+    async defer></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAnfDSStNP9IgTNVIAJUBbiRPLWhBmmutU",
+        authDomain: "fooddrop-7bf0b.firebaseapp.com",
+        databaseURL: "https://fooddrop-7bf0b.firebaseio.com",
+        projectId: "fooddrop-7bf0b",
+        storageBucket: "fooddrop-7bf0b.appspot.com",
+        messagingSenderId: "909620415382"
+      };
+      firebase.initializeApp(config);
+</script>
+
+	<script>
+
+	var imgur_clientId = 'b37798f670e2df3';
+
+	function initGeolocation() {
+
+        var onSuccess = function(position) {
+
+            document.getElementById("createDrop_location").value = position.coords.latitude + ", " + position.coords.longitude;
+        };
+        function onError(error) {
+            alert('code: '    + error.code    + '\n' +
+                  'message: ' + error.message + '\n');
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+
+
+        
+      }
+
+
+      function foodpool_firebase_addDrop()
+        {
+        	var randomNumber = new Date().getUTCMilliseconds();
+
+        	var title = document.getElementById("createDrop_title").value;
+        	var desc = document.getElementById("createDrop_description").value;
+        	var location = document.getElementById("createDrop_location").value;
+
+
+
+			var currentTime = new Date();
+
+
+
+			var file = document.getElementById("createDrop_file").files[0];
+                console.log(file);
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(readerEvt) {
+                        var binaryString = readerEvt.target.result;
+                        var base64Data = btoa(binaryString);
+                      
+
+
+                        $.ajax({
+                              url: 'https://api.imgur.com/3/image',
+                              type: 'POST',
+                              headers: {
+                                Authorization: 'CLIENT-ID ' + imgur_clientId,
+                                Accept: 'application/json'
+                              },
+                              data: {
+                                image:  base64Data
+                              },
+                              success: function(result) {
+                                var id = result.data.id;
+                                var imgurURL = 'http://i.imgur.com/' + id + '.png';
+
+                             
+                                firebase.database().ref('drops/' + randomNumber).set({
+						                creatorUID: firebase.auth().currentUser.uid,
+						                creatorName: title,
+						                dateCreated: (currentTime.getMonth() + 1) + '/' + currentTime.getDate() + '/' + currentTime.getFullYear(),
+						                dropPictureURL: imgurURL,
+						                locationGeo: location,
+						                keyValue: randomNumber,
+						                description: desc
+						          }, function(err) { alert("Drop created!");
+                                document.location = 'index.html'; } );
+
+                                
+
+                              }
+                            });
+                    };
+
+                    reader.readAsBinaryString(file);
+                    //at
+                }
+
+
+            
+        }
+
+	</script>
+
+
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script>
+	$(".button-collapse").sideNav();
+	$('#index_getStartedButton').click(function(){ $(".button-collapse").sideNav('show'); return false; });
+  </script>
+  <script src='cordova.js'></script>
+
+
+  </body>
+</html>

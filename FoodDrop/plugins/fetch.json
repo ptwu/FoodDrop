@@ -166,5 +166,29 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-firebase": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-firebase@0.1.21"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-firebase-auth": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-firebase-auth@1.0.5"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "cordova-plugin-cocoapod-support": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-cocoapod-support"
+        },
+        "is_top_level": false,
+        "variables": {}
     }
 }
