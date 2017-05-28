@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>FoodDrop</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  
+  
+</head>
+<body>
+  <header>	
+      <nav class="top-nav" style="background-color:#D1D1D1">
+        <div class="container">
+          <div class="nav-wrapper">
+			   <a href="#" data-activates="slide-out" class="page-title button-collapse show-on-large"><i class="material-icons">menu</i></a>
+			  <a href="#" class="brand-logo center"><img class="responsive-img" src = "img/navbarimg.png" ></img></a> <a href="#" class="brand-logo right" style="font-size:12px"></a>
+			  <ul id="nav-mobile" class="left hide-on-med-and-down">
+
+	
+			  </ul>
+		  </div>
+        </div>
+		
+      </nav>
+	  
+		<ul id="slide-out" class="side-nav" >
+		
+			<li><a style="text-color:#000000;pointer-events: none">Menu</a></li>
+
+			<li><a href="index.html"><i class="material-icons">info_outline</i>Home</a></li>
+			<li><a class="waves-effect" href="myDrops.html"><i class="material-icons">assignment_ind</i>My Drops</a></li>
+			<li class="active"><a class="waves-effect" href="#"><i class="material-icons">stars</i>Causes</a></li>
+			<li><a class="waves-effect" href="login.html"><i class="material-icons">vpn_key</i>Login/Register</a></li>
+		
+	  </ul>
+	  
+     
+    </header>
+	<main>
+		
+
+		<!-- CARD -->
+		<div id="causescontainer" class="container">
+ 		
+	    </div>
+  </main>
+    
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+  <script>
+
+  
+      // Initialize Firebase
+
+      var config = {
+        apiKey: "AIzaSyAnfDSStNP9IgTNVIAJUBbiRPLWhBmmutU",
+        authDomain: "fooddrop-7bf0b.firebaseapp.com",
+        databaseURL: "https://fooddrop-7bf0b.firebaseio.com",
+        projectId: "fooddrop-7bf0b",
+        storageBucket: "fooddrop-7bf0b.appspot.com",
+        messagingSenderId: "909620415382"
+      };
+      firebase.initializeApp(config);
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          foodpool_firebase_getCauses();
+        }
+      });
+
+  
+		function foodpool_firebase_addExampleCause()
+        {
+        	
+                                firebase.database().ref('causes/trentonsoupkitchen').set({
+						                title: 'Trenton Soup Kitchen',
+						                request: 'Apples, Lettuce, Tomatoes',
+						                location: '72 Escher St, Trenton, NJ 08609'
+						          });
+
+            
+        }
+
+
+         function foodpool_firebase_getCauses()
+        {
+            console.log("entered retrireve pfucntion");   
+            return firebase.database().ref('/causes').once('value').then(function(snapshot) {
+              var json = snapshot.val();
+
+                for(var i in json)
+                {
+                	
+                
+                    var title = json[i].title;
+                    
+                    var request = json[i].request;
+
+                      // var dateCreated = json[i].dateCreated;
+                      var location = json[i].location;
+                      // var dropPicture = json[i].dropPictureURL;
+                      // var locationGeo = json[i].locationGeo;
+
+                    
+                      	console.log("tape c");
+
+                        document.getElementById("causescontainer").innerHTML += "<div class='row valign-wrapper'> <div class='col s12'> <div class='card'> <div class='card-image'> <img class='responsive-img' src='http://i.imgur.com/5G2YlL6.jpg'> <span class='card-title'>Trenton Soup Kitchen</span> </div> <div class='card-content'> <p>Requesting: Apples, Lettuce, Tomatoes<br>Location: 72 Escher St, Trenton, NJ 08609</p> </div> </div> </div></div> ";
+
+
+                    
+                  }
+
+                     
+
+
+              
+
+            });
+        }
+
+  </script>
+
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script>
+	$(".button-collapse").sideNav();
+	$('#index_getStartedButton').click(function(){ $(".button-collapse").sideNav('show'); return false; });
+  </script>
+  <script src='cordova.js'></script>
+  </body>
+</html>

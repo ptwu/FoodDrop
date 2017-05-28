@@ -3,6 +3,7 @@
 
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
   <title>FoodDrop</title>
 
   <!-- CSS  -->
@@ -13,70 +14,142 @@
   
 </head>
 <body>
-  <header>	
-      <nav class="top-nav" style="background-color:#c62828">
+  <header>  
+      <nav class="top-nav" style="background-color:#D1D1D1">
         <div class="container">
           <div class="nav-wrapper">
-			   <a href="#" data-activates="slide-out" class="page-title button-collapse show-on-large"><i class="material-icons">menu</i></a>
-			  <a href="#" class="brand-logo center"><img class="responsive-img" src = "img/navbarimg.png" ></img></a> <a href="#" class="brand-logo right" style="font-size:12px"></a>
-			  <ul id="nav-mobile" class="left hide-on-med-and-down">
+         <a href="#" data-activates="slide-out" class="page-title button-collapse show-on-large"><i class="material-icons">menu</i></a>
+        <a href="#" class="brand-logo center"><img class="responsive-img" src = "img/navbarimg.png" ></img></a> <a href="#" class="brand-logo right" style="font-size:12px"></a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
 
-	
-			  </ul>
-		  </div>
+  
+        </ul>
+      </div>
         </div>
-		
+    
       </nav>
-	  
-		<ul id="slide-out" class="side-nav" >
-		
-			<li><a style="text-color:#000000;pointer-events: none">Menu</a></li>
+    
+    <ul id="slide-out" class="side-nav" >
+    
+      <li><a style="text-color:#000000;pointer-events: none">Menu</a></li>
 
-			<li><a href="index.html"><i class="material-icons">info_outline</i>Home</a></li>
-			<li class="active"><a class="waves-effect" href="#"><i class="material-icons">assignment_ind</i>My Drops</a></li>
-			<li><a class="waves-effect" href="causes.html"><i class="material-icons">stars</i>Causes</a></li>
-			<li><a class="waves-effect" href="nearMe.html"><i class="material-icons">room</i>Near Me</a></li>
-			<li><a class="waves-effect" href="login.html"><i class="material-icons">vpn_key</i>Login/Register</a></li>
-			
-		
-	  </ul>
-	  
+      <li><a href="index.html"><i class="material-icons">info_outline</i>Home</a></li>
+      <li class="active"><a class="waves-effect" href="#"><i class="material-icons">assignment_ind</i>My Drops</a></li>
+      <li><a class="waves-effect" href="causes.html"><i class="material-icons">stars</i>Causes</a></li>
+      <li><a class="waves-effect" href="login.html"><i class="material-icons">vpn_key</i>Login/Register</a></li>
+      
+    
+    </ul>
+    
      
     </header>
-	<main>
+  <main>
   
 
-		<!-- CARD -->
-		<div class="container">
- 		<div class="row valign-wrapper">
-	        <div class="col s12">
-	          <div class="card">
-	            <div class="card-image">
-	              <img class="responsive-img" src="http://i.imgur.com/VToGAEW.jpg">
-	              <span class="card-title">Lettuce</span>
-	            </div>
-	            <div class="card-content">
-	              <p>Dropper: you</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">end drop</a>
-	            </div>
-	          </div>
-	      </div>
-	    </div>
-	    </div>
-  </main>
-  </main>
+    <!-- CARD -->
+    <div id="maincontainerpage" class="container">
     
+          
+
+
+  
+      </div>
+  </main>
+
+    
+
+
+
+
+
+
 
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+  <script>
+      // Initialize Firebase
+
+      var config = {
+        apiKey: "AIzaSyAnfDSStNP9IgTNVIAJUBbiRPLWhBmmutU",
+        authDomain: "fooddrop-7bf0b.firebaseapp.com",
+        databaseURL: "https://fooddrop-7bf0b.firebaseio.com",
+        projectId: "fooddrop-7bf0b",
+        storageBucket: "fooddrop-7bf0b.appspot.com",
+        messagingSenderId: "909620415382"
+      };
+      firebase.initializeApp(config);
+
+      var globalLoggedIn = false;
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          globalLoggedIn = true;
+          foodpool_firebase_getMyDroppings();
+        }
+      });
+
+
+
+      document.addEventListener('deviceready', function() {
+        
+            console.log("global elighte");
+           
+          
+      });
+
+      function foodpool_firebase_deleteDrop(dropID)
+        {
+          console.log("trying to delete drop: " + dropID);
+            firebase.database().ref('drops/' + dropID).remove();
+        }
+
+      function foodpool_firebase_getMyDroppings()
+        {
+            console.log("entered retrireve pfucntion");   
+            return firebase.database().ref('/drops/').once('value').then(function(snapshot) {
+              var json = snapshot.val();
+
+                for(var i in json)
+                {
+                	console.log(json[i].creatorUID + " COMPARE " + firebase.auth().currentUser.uid);
+                  if(json[i].creatorUID === firebase.auth().currentUser.uid)
+                  {
+
+                    var key = json[i].keyValue;
+                    
+                    var creatorName = json[i].creatorName
+
+                      // var dateCreated = json[i].dateCreated;
+                      var description = json[i].description;
+                      var dropPicture = json[i].dropPictureURL;
+                      // var locationGeo = json[i].locationGeo;
+
+                    
+
+
+                        document.getElementById("maincontainerpage").innerHTML += "<div class='row valign-wrapper'> <div class='col s12'> <div class='card'> <div class='card-image'> <img class='responsive-img' src='" + dropPicture + "' style='max-width:300px'> <span class='card-title'>" + creatorName + "</span> </div> <div class='card-content'> <p>Description: " + description + "</p> </div> <div class='card-action'> <button class='btn-large waves-effect waves-light red darken-3' onclick='foodpool_firebase_deleteDrop(" + key + ")'>End Drop</button> </div> </div> </div> </div>";
+
+
+                    
+                  }
+
+                     
+
+                    
+                }
+
+
+              
+
+            });
+        }
+  </script>
   <script src="js/materialize.js"></script>
   <script src="js/init.js"></script>
   <script>
-	$(".button-collapse").sideNav();
-	$('#index_getStartedButton').click(function(){ $(".button-collapse").sideNav('show'); return false; });
+  $(".button-collapse").sideNav();
+  $('#index_getStartedButton').click(function(){ $(".button-collapse").sideNav('show'); return false; });
   </script>
   <script src='cordova.js'></script>
   </body>

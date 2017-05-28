@@ -15,7 +15,7 @@
 </head>
 <body>
   <header>	
-      <nav class="top-nav" style="background-color:#B50000">
+      <nav class="top-nav" style="background-color:#D1D1D1">
         <div class="container">
           <div class="nav-wrapper">
 			  <a href="#" data-activates="slide-out" class="page-title button-collapse show-on-large"><i class="material-icons">menu</i></a>
@@ -37,7 +37,6 @@
 			<li><a href="index.html"><i class="material-icons">info_outline</i>Home</a></li>
 			<li><a class="waves-effect" href="myDrops.html"><i class="material-icons">assignment_ind</i>My Drops</a></li>
 			<li><a class="waves-effect" href="causes.html"><i class="material-icons">stars</i>Causes</a></li>
-			<li><a class="waves-effect" href="nearMe.html"><i class="material-icons">room</i>Near Me</a></li>
 			<li class="active"><a class="waves-effect" href="#"><i class="material-icons">vpn_key</i>Login/Register</a></li>
 
 			
@@ -122,19 +121,14 @@
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           globalLoggedIn = true;
+           document.getElementById("login_page").innerHTML = "You're already logged in as " + firebase.auth().currentUser.email + ". <br><br>" +
+          "<button name='btn_register' class='col s12 btn btn-large waves-effect red darken-1' onclick='foodpool_firebase_signout()'>Sign Out</button>";
         }
       });
 
 
 
-      document.addEventListener('deviceready', function() {
-        if(globalLoggedIn)
-          {
-            console.log("global elighte");
-             document.getElementById("login_page").innerHTML = "You're already logged in as " + firebase.auth().currentUser.email + ". <br><br>" +
-          "<button name='btn_register' class='col s12 btn btn-large waves-effect red darken-1' onclick='foodpool_firebase_signout()'>Sign Out</button>";
-          }
-      });
+     
   </script>
 
   <script>
@@ -158,13 +152,7 @@
             });
 
 
-            if(!error)
-            {
-              alert("Logged in successfully.");
-              
-            }
-
-            document.location = 'index.html';
+           
 
             
         }

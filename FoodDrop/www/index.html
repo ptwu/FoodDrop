@@ -45,9 +45,12 @@
 
     <style>
        #map {
-        height: 400px;
-        width: 800px;
+        height: 360px;
+        width: 50px;
        }
+
+       
+    
     </style>
  
     
@@ -59,13 +62,13 @@
 <body>
   
     <header>  
-      <nav class="top-nav" style="background-color:#c62828">
+      <nav class="top-nav" style="background-color:#D1D1D1">
         <div class="container">
           <div class="nav-wrapper">
         <a href="#" data-activates="slide-out" class="page-title button-collapse show-on-large"><i class="material-icons">menu</i></a>
 
         <a href="#" class="brand-logo center"><img class="responsive-img" src = "img/navbarimg.png" ></img></a> <a href="#" class="brand-logo right" style="font-size:12px"></a>
-        <a id="loginstatus" href="login.html" class="brand-logo right" style="font-size:12px">Login/Register/Sign Out</a>
+        <a id="loginstatus" href="login.html" class="brand-logo right" style="font-size:12px">Account</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
 
   
@@ -124,6 +127,10 @@
                 zoom: 15,
                 center: geolocated
             });
+
+
+              document.getElementById('map').style.width = '90%';
+
         };
         function onError(error) {
             alert('code: '    + error.code    + '\n' +

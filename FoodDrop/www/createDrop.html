@@ -12,7 +12,7 @@
   <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
    <header>	
-      <nav class="top-nav" style="background-color:#c62828">
+      <nav class="top-nav" style="background-color:#D1D1D1">
         <div class="container">
           <div class="nav-wrapper">
 			   <a href="#" data-activates="slide-out" class="page-title button-collapse show-on-large"><i class="material-icons">menu</i></a>
@@ -148,6 +148,7 @@
 						                dateCreated: (currentTime.getMonth() + 1) + '/' + currentTime.getDate() + '/' + currentTime.getFullYear(),
 						                dropPictureURL: imgurURL,
 						                locationGeo: location,
+						                keyValue: randomNumber,
 						                description: desc
 						          }, function(err) { alert("Drop created!");
                                 document.location = 'index.html'; } );
@@ -159,6 +160,7 @@
                     };
 
                     reader.readAsBinaryString(file);
+                    //at
                 }
 
 
